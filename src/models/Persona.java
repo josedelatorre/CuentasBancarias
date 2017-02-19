@@ -237,7 +237,7 @@ public class Persona {
 		this.transferencia(cantidad, num1, num2);
 		System.out.println(
 				"De la cuenta " + num1 + " a la cuenta " + num2 + " se han traspasado " + cantidad + " pokemonedas");
- 
+
 	}
 
 	/**
