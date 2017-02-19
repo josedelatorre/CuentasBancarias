@@ -9,6 +9,9 @@ public class Ventanilla {
 		p.nuevaCuenta(700);
 		p.nuevaCuenta(700);
 		p.nuevaCuenta(700);
+		for(String valor:p.verNumerosDeCuetas()){
+			System.out.println(valor);
+		}
 		
 		
 		

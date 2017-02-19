@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Arrays;
+
 public class Persona {
 	private final int numCuentasMax = 3;
 	private String DNI;
@@ -62,4 +64,20 @@ public class Persona {
 		return cuentasCreadas;
 	}
 
+	/**
+	 * Devuelve los numeros de cuentas
+	 * @return Array de String con los numeros de cuentas
+	 */
+	public String[] verNumerosDeCuetas (){
+		String[] cuentasPersona = new String[0];
+		for(int i =0;i<cuentas.length;i++){
+			cuentasPersona=Arrays.copyOf(cuentasPersona, cuentasPersona.length+1);
+			cuentasPersona[i]=cuentas[i].getNumeroCuenta();
+		}
+		return cuentasPersona;
+	}
+
+	public void ingreso(Cuenta cuenta , float importe){
+		cuenta.recibirAbono(importe);
+	}
 }
