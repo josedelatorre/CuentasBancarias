@@ -5,7 +5,7 @@ import models.*;
 public class Ventanilla {
 	public static void main(String args[]) {
 		Persona p = new Persona("1234567Q");
-
+ 
 		p.nuevaCuenta(700); // creamos la primera cuenta
 		p.esMorosa(); // no devuelve nada al no ser moroso aun
 		p.todosLosDatos(); // muestra los datos introducidos hasta ahora

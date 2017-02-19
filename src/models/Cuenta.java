@@ -77,7 +77,7 @@ public class Cuenta {
 	public static String siguienteNumeroCuenta() {
 
 		return String.valueOf(ThreadLocalRandom.current().nextInt(100000000, 999999999));
-
+ 
 	}
 	
 	
