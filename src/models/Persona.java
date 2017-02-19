@@ -13,6 +13,37 @@ public class Persona {
 		DNI = dNI;
 		this.cuentas = cuentas;
 	}
+	
+	public void imprimirEstadoCuenta(){
+		for (Cuenta cuenta : cuentas) 
+			if(cuenta != null) 
+				System.out.println("Cuenta " + cuenta.getNumeroCuenta() + " saldo: " + cuenta.getSaldo());
+	}
+	
+	public void imprimirEstadoCuenta(int numCuenta){
+		if(cuentas[numCuenta] != null) 
+			System.out.println("Cuenta " + cuentas[numCuenta].getNumeroCuenta() + " saldo: " + cuentas[numCuenta].getSaldo());
+	}
+	
+	
+	public void recibirDinero(float cantidad, int numCuenta){
+		if(numCuenta < this.numCuentasMax)
+			cuentas[numCuenta].recibirAbono(cantidad);
+		else
+			System.out.println("La cuenta número: " + numCuenta + " no existe.");
+	}
+	
+	public void pagarDinero(float cantidad, int numCuenta){
+		if(numCuenta < this.numCuentasMax)
+			cuentas[numCuenta].pagarRecibo(cantidad);
+		else
+			System.out.println("La cuenta número: " + numCuenta + " no existe.");
+	}
+	
+	public void realizarTransferencia(int numCuenta1, int numCuenta2, float cantidad){
+		pagarDinero(cantidad, numCuenta1);
+		recibirDinero(cantidad, numCuenta2);
+	}
 
 	/**
 	 * Comprueba si una persona es morosa o no

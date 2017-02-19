@@ -30,7 +30,7 @@ public class Cuenta {
 	}	
 	
 	public static String siguienteNumeroCuenta(){
-		return String.valueOf(Math.random());
+		return String.valueOf(Math.round(Math.random()*10000000));
 	}
 
 	@Override
