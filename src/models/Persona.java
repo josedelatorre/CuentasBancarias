@@ -25,6 +25,7 @@ public class Persona {
 			if (c != null) {
 				if (c.getSaldo() < 0) {
 					esMorosa = true;
+					break;
 				}
 			}
 		}
@@ -34,15 +35,14 @@ public class Persona {
 	public void nuevaCuenta() {
 		this.nuevaCuenta(0);
 	}
-	
+
 	public void nuevaCuenta(float ingresoInicial) {
 		String numeroCuenta = Cuenta.siguienteNumeroCuenta();
 		int numeroCuentas = this.numeroCuentas();
-		
+
 		if (this.numeroCuentas() < this.numCuentasMax) {
-			cuentas[numeroCuentas] = new Cuenta(numeroCuenta, ingresoInicial); 
-		} 
-		else {
+			cuentas[numeroCuentas] = new Cuenta(numeroCuenta, ingresoInicial);
+		} else {
 			System.out.println("La persona ya tiene el máximo de cuentas");
 		}
 	}
@@ -62,4 +62,45 @@ public class Persona {
 		return cuentasCreadas;
 	}
 
+	public void ingresarEnCuenta(float ingreso, int numeroCuenta) {
+		numeroCuenta--;
+		if(ingreso < 0.0f || numeroCuenta < 0 || numeroCuenta > this.numCuentasMax)
+			return;
+		
+		cuentas[numeroCuenta].recibirAbono(ingreso);
+	}
+
+	public void pagarRecibo(float cantidadEnviar, int numeroCuenta) {
+		numeroCuenta--;
+		if(cantidadEnviar < 0.0f || numeroCuenta < 0 || numeroCuenta > this.numCuentasMax)
+		{
+			System.out.println("Error");
+			return;
+		}
+		cuentas[numeroCuenta].pagarRecibo(cantidadEnviar);
+	}
+	
+	public void transferir(float cantidad, int scr, int dst){
+		scr--;
+		dst--;
+		if(cantidad < 0 || cantidad > cuentas[scr].getSaldo())
+		{
+			System.out.println("No es posible la transferencia");
+			return;
+		}
+		
+		cuentas[scr].pagarRecibo(cantidad);
+		cuentas[dst].recibirAbono(cantidad);
+		
+	}
+	
+	public float getSaldoCuenta(int numCuenta) {
+		numCuenta--;
+		if(numCuenta < 0 || numCuenta > this.numCuentasMax)
+		{
+			System.out.println("Numero de cuenta no existente");
+			return 0.0f;
+		}
+		return cuentas[numCuenta].getSaldo();
+	}
 }
