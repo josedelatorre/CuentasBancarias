@@ -53,6 +53,41 @@ public class Persona {
 		return cuenta-1;	
 	}
 	
+	
+	/**
+	 * Pregunta la cuenta en la que realizar las operaciones
+	 * @return devuelve el número de cuenta
+	 */
+	public int preguntarCuenta(String Mensaje) {
+		
+		Scanner sc= new Scanner (System.in);
+		boolean escorrecto=false;
+		String aux;
+		int cuenta=0;
+		
+		while (escorrecto==false){
+		System.out.println(Mensaje);
+		aux=sc.nextLine();
+		
+		try
+		{
+
+		cuenta=Integer.parseInt(aux);
+		if(cuenta<=0 || cuenta>3){
+			System.out.println("Lo siento la cuenta tiene que estar entre el 1 y el 3");
+		}else{
+		escorrecto=true;
+		}
+		}catch(Exception e){
+			escorrecto=false;
+		}
+		
+		}
+		
+		return cuenta-1;	
+	}
+	
+	
 	/**
 	 * Comprobación rápida de si es morosa
 	 * @return booleano si es moroso
@@ -116,12 +151,27 @@ public class Persona {
 		}
 
 	}
+	
+	
+	
 	/**
 	 * Nueva cuenta
 	 */
 	public void nuevaCuenta() {
 		this.nuevaCuenta(0);
 	}
+	
+	public void GetSaldoAllAcc()
+	{
+		
+		for (Cuenta cuenta : this.cuentas) {
+			if (cuenta != null){
+				System.out.println(("-----------------------------SALDO---------------------------"));
+				System.out.println(cuenta);
+				}
+		}
+	}
+	
 	
 	
 	/**
