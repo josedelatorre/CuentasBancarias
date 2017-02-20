@@ -48,7 +48,10 @@ public class Ventanilla {
 	
 	
 	
-	
+	/**
+	 * Pregunta el dinero con el que realizar las operaciones en la ventanilla
+	 * @return dinero
+	 */
 	public static float DineroVentanilla() {
 		Scanner sc = new Scanner(System.in);
 		boolean escorrecto = false;

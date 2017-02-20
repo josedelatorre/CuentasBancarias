@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class Cuenta {
 	private String numeroCuenta;
 	private float saldo;
-	private float dinerotransferir;
 
 	// Constructor
 	public Cuenta(String numeroCuenta, float saldo) {
@@ -30,7 +29,6 @@ public class Cuenta {
 	 * @return saldo cuenta
 	 */
 	public float getSaldo() {
-
 		return saldo;
 	}
 
@@ -100,8 +98,11 @@ public class Cuenta {
 		System.out.println("----------------------------------------------------------------------------");
 	}
 
+	/**
+	 * quitar el dinero de la cuenta desde la que se va a realizar la transferencia
+	 * @param cantidad
+	 */
 	public void obtenerTransferencia(float cantidad) {
-
 
 		if (saldo < 0) {
 			System.out.println("Usted está en números rojos");
@@ -114,9 +115,11 @@ public class Cuenta {
 
 	}
 
+	/**
+	 * Sumar dinero de la transferencia a una cuenta
+	 * @param dinero
+	 */
 	public void realizarTransferencia(float dinero) {
-
-	
 		if (dinero> 0) {
 			saldo += dinero;
 		}
