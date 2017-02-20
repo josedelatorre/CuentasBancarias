@@ -47,6 +47,10 @@ public class Cuenta {
 				saldo += cantidad;
 		}
 
+			System.out.println("-----------------------------------RECIBO-----------------------------------");
+			System.out.println("Ha ingresado " + cantidad + " en la cuenta " + numeroCuenta);
+			System.out.println("El saldo de la cuenta actual es " + saldo);
+			System.out.println("----------------------------------------------------------------------------");
 	}
 	
 	
@@ -92,12 +96,12 @@ public class Cuenta {
 		
 		if(cantidad > 0){
 			
-			saldo += cantidad;		
+			saldo -= cantidad;		
 			
 		}
 		
 		System.out.println("-----------------------------------RECIBO-----------------------------------");
-		System.out.println("Ha ingresado " + cantidad + " en la cuenta " + numeroCuenta);
+		System.out.println("Ha pagado " + cantidad + " en la cuenta " + numeroCuenta);
 		System.out.println("El saldo de la cuenta actual es " + saldo);
 		System.out.println("----------------------------------------------------------------------------");
 	}	
