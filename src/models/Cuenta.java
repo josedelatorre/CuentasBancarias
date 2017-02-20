@@ -1,8 +1,10 @@
 package models;
+import java.util.Random;
 
 public class Cuenta {
 	private String numeroCuenta;
 	private float saldo;
+	private static Random rnd = new Random();
 	
 	public Cuenta(String numeroCuenta, float saldo) {
 		this.numeroCuenta = numeroCuenta;
@@ -30,7 +32,10 @@ public class Cuenta {
 	}	
 	
 	public static String siguienteNumeroCuenta(){
-		return String.valueOf(Math.random());
+		String nuevaCuenta=String.valueOf(rnd.nextLong());
+		// Pendiente: Hacer que el numero de cuenta sea entero.
+		
+		return nuevaCuenta;
 	}
 
 	@Override

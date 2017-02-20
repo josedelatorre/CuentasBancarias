@@ -6,11 +6,11 @@ public class Persona {
 	private Cuenta[] cuentas = new Cuenta[numCuentasMax];
 
 	public Persona(String dNI) {
-		DNI = dNI;
+		this.DNI = dNI;
 	}
 
 	public Persona(String dNI, Cuenta[] cuentas) {
-		DNI = dNI;
+		this.DNI = dNI;
 		this.cuentas = cuentas;
 	}
 
@@ -30,20 +30,78 @@ public class Persona {
 		}
 		return esMorosa;
 	}
-
+	
+	public void nuevaCuenta(float ingresoInicial) {
+		String numeroCuenta = Cuenta.siguienteNumeroCuenta();
+		boolean end=false;
+		
+		if (this.numeroCuentas() < this.numCuentasMax) {
+			for (int i=0; i<this.cuentas.length && !end; i++) {
+				if (this.cuentas[i] == null) {
+					cuentas[i] = new Cuenta(numeroCuenta, ingresoInicial);
+					System.out.println("\nCuenta creada.");
+					end=true;
+				}
+			}
+		} 
+		else {
+			System.out.println("La persona ya tiene el máximo de cuentas");
+		}
+	}
+	
 	public void nuevaCuenta() {
 		this.nuevaCuenta(0);
 	}
 	
-	public void nuevaCuenta(float ingresoInicial) {
-		String numeroCuenta = Cuenta.siguienteNumeroCuenta();
-		int numeroCuentas = this.numeroCuentas();
-		
-		if (this.numeroCuentas() < this.numCuentasMax) {
-			cuentas[numeroCuentas] = new Cuenta(numeroCuenta, ingresoInicial); 
-		} 
-		else {
-			System.out.println("La persona ya tiene el máximo de cuentas");
+	/**
+	 * Muestra el numero de cuenta junto con el saldo de la misma.
+	 * 
+	 * @return Cuenta - Saldo.
+	 */
+	public void getSaldo(String cliente){
+		System.out.println("\nCuentas:");
+		for(int i=0; i<this.cuentas.length; i++){
+			if(this.cuentas[i]!=null){
+				System.out.printf("%s\t%s€\n", this.cuentas[i].getNumeroCuenta(), this.cuentas[i].getSaldo());
+			}
+		}
+	}
+	
+	public void setTransferencia(int a, int b, float c){
+		this.cuentas[a-1].pagarRecibo(c);
+		this.cuentas[b-1].recibirAbono(c);
+	}
+	
+	public int getCuentas(String cliente){
+		int j=0;
+		for(int i=0; i<this.cuentas.length; i++){
+			if(this.cuentas[i]!=null){
+				System.out.printf("Código: (%s)\tCuenta: %s\n", (i+1), this.cuentas[i].getNumeroCuenta());
+				j++;
+			}
+		}
+		return j;
+	}
+	
+	public void setIngreso(int a, float b){
+		this.cuentas[a-1].recibirAbono(b);
+	}
+	
+	public void setRetirar(int a, float b){
+		this.cuentas[a-1].pagarRecibo(b);
+	}
+	
+	/**
+	 * Borra cuenta asociada
+	 * 
+	 * @return Borrar cuenta
+	 */
+	public void borrarCuenta(int a){
+		boolean end=false;
+		for(int i=0; i<this.cuentas.length; i++){
+			if(i==(a-1)){
+				this.cuentas[i]=null;
+			}
 		}
 	}
 
