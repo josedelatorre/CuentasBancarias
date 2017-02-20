@@ -29,7 +29,7 @@ public class Ventanilla {
 		
 		System.out.println(("----------------------------------------------------------------------------"));
 		System.out.println("Quiero saldar la deuda");
-		p.cuentas[p.preguntarCuenta()].pagarRecibo();
+		p.cuentas[p.preguntarCuenta()].recibirAbono();
 		
 		System.out.println(("----------------------------------------------------------------------------"));
 		
