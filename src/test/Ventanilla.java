@@ -11,7 +11,7 @@ public class Ventanilla {
 		p.nuevaCuenta(700);
 		
 		//La persona recibe la nomina mensual (1100) en la primera cuenta
-		p.recibirDinero(1100, 0);
+		p.recibirDinero(1100, 0,"1234567Q");
 		
 		//La persona paga el alquiler (750) en la segunda cuenta
 		p.pagarDinero(750, 1);
@@ -21,7 +21,7 @@ public class Ventanilla {
 		else
 			System.out.println("La persona no es morosa");
 		
-		p.realizarTransferencia(2, 1, 500);
+		p.realizarTransferencia(2, 1, 500,"1234567Q");
 		
 		p.imprimirEstadoCuenta(2);
 		
