@@ -1,9 +1,11 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Persona {
-	private final int numCuentasMax = 3;
 	private String DNI;
-	private Cuenta[] cuentas = new Cuenta[numCuentasMax];
+	private List<Cuenta> cuentas = new ArrayList<Cuenta>();
 
 	/**
 	 * Crea un nuevo objeto tipo Persona
@@ -29,8 +31,8 @@ public class Persona {
 	 * @param numCuenta El número de cuenta de la que queremos información.
 	 */
 	public void imprimirEstadoCuenta(int numCuenta){
-		if(cuentas[numCuenta] != null) 
-			System.out.println("Cuenta " + cuentas[numCuenta].getNumeroCuenta() + " saldo: " + cuentas[numCuenta].getSaldo());
+		if(cuentas.get(numCuenta) != null) 
+			System.out.println("Cuenta " + cuentas.get(numCuenta).getNumeroCuenta() + " saldo: " + cuentas.get(numCuenta).getSaldo());
 	}
 	
 	/**
@@ -38,11 +40,11 @@ public class Persona {
 	 * @param cantidad la cantidad de dinero a ingresar.
 	 * @param numCuenta el numero de cuenta destino.
 	 */
-	public void recibirDinero(float cantidad, int numCuenta){
-		if(numCuenta < this.numCuentasMax)
-			cuentas[numCuenta].recibirAbono(cantidad);
+	public void recibirDinero(float cantidad, int numCuenta, String DNI){
+		if(this.DNI.equals(DNI))
+			cuentas.get(numCuenta).recibirAbono(cantidad);
 		else
-			System.out.println("La cuenta número: " + numCuenta + " no existe.");
+			System.out.println("La acreditación no es válida.");
 	}
 	
 	/**
@@ -51,10 +53,10 @@ public class Persona {
 	 * @param numCuenta el numero de cuenta afectada.
 	 */
 	public void pagarDinero(float cantidad, int numCuenta){
-		if(numCuenta < this.numCuentasMax)
-			cuentas[numCuenta].pagarRecibo(cantidad);
+		if(this.DNI.equals(DNI))
+			cuentas.get(numCuenta).pagarRecibo(cantidad);
 		else
-			System.out.println("La cuenta número: " + numCuenta + " no existe.");
+			System.out.println("La acreditación no es válida.");
 	}
 	
 	/**
@@ -63,9 +65,9 @@ public class Persona {
 	 * @param numCuenta2 la cuenta en la que se quiere recibir el dinero.
 	 * @param cantidad la cantidad de dinero que se quiere traspasar.
 	 */
-	public void realizarTransferencia(int numCuenta1, int numCuenta2, float cantidad){
+	public void realizarTransferencia(int numCuenta1, int numCuenta2, float cantidad,String DNI){
 		pagarDinero(cantidad, numCuenta1);
-		recibirDinero(cantidad, numCuenta2);
+		recibirDinero(cantidad, numCuenta2,DNI);
 	}
 
 	/**
@@ -98,28 +100,6 @@ public class Persona {
 	 */
 	public void nuevaCuenta(float ingresoInicial) {
 		String numeroCuenta = Cuenta.siguienteNumeroCuenta();
-		int numeroCuentas = this.numeroCuentas();
-		
-		if (this.numeroCuentas() < this.numCuentasMax) {
-			cuentas[numeroCuentas] = new Cuenta(numeroCuenta, ingresoInicial); 
-		} 
-		else {
-			System.out.println("La persona ya tiene el máximo de cuentas");
-		}
+		cuentas.add(new Cuenta(numeroCuenta,ingresoInicial));
 	}
-
-	/**
-	 * Calcula el numero de cuentas creadas de la persona
-	 * @return Numero de cuentas creadas.
-	 */
-	private int numeroCuentas() {
-		int cuentasCreadas = 0;
-		for (Cuenta cuenta : this.cuentas) {
-			if (cuenta != null) {
-				cuentasCreadas++;
-			}
-		}
-		return cuentasCreadas;
-	}
-
 }
