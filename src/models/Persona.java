@@ -1,16 +1,18 @@
 package models;
 
+import java.util.ArrayList;
+
 public class Persona {
 	private final int numCuentasMax = 3;
 	private String DNI;
-	private Cuenta[] cuentas = new Cuenta[numCuentasMax];
+	private ArrayList<Cuenta> cuentas = new ArrayList<Cuenta>(3);
 
 	/**
 	 * Crea un nuevo objeto tipo Persona
 	 * @param dNI El DNI con el que se identificará a la persona.
 	 */
-	public Persona(String dNI) {
-		DNI = dNI;
+	public Persona(String DNI) {
+		this.setDNI(DNI);
 	}
 
 	//Eliminado segundo constructor
@@ -29,8 +31,8 @@ public class Persona {
 	 * @param numCuenta El número de cuenta de la que queremos información.
 	 */
 	public void imprimirEstadoCuenta(int numCuenta){
-		if(cuentas[numCuenta] != null) 
-			System.out.println("Cuenta " + cuentas[numCuenta].getNumeroCuenta() + " saldo: " + cuentas[numCuenta].getSaldo());
+		if(cuentas.get(numCuenta) != null) 
+			System.out.println("Cuenta " + cuentas.get(numCuenta).getNumeroCuenta() + " saldo: " + cuentas.get(numCuenta).getSaldo());
 	}
 	
 	/**
@@ -40,7 +42,7 @@ public class Persona {
 	 */
 	public void recibirDinero(float cantidad, int numCuenta){
 		if(numCuenta < this.numCuentasMax)
-			cuentas[numCuenta].recibirAbono(cantidad);
+			cuentas.get(numCuenta).recibirAbono(cantidad);
 		else
 			System.out.println("La cuenta número: " + numCuenta + " no existe.");
 	}
@@ -52,7 +54,7 @@ public class Persona {
 	 */
 	public void pagarDinero(float cantidad, int numCuenta){
 		if(numCuenta < this.numCuentasMax)
-			cuentas[numCuenta].pagarRecibo(cantidad);
+			cuentas.get(numCuenta).pagarRecibo(cantidad);
 		else
 			System.out.println("La cuenta número: " + numCuenta + " no existe.");
 	}
@@ -98,10 +100,9 @@ public class Persona {
 	 */
 	public void nuevaCuenta(float ingresoInicial) {
 		String numeroCuenta = Cuenta.siguienteNumeroCuenta();
-		int numeroCuentas = this.numeroCuentas();
 		
 		if (this.numeroCuentas() < this.numCuentasMax) {
-			cuentas[numeroCuentas] = new Cuenta(numeroCuenta, ingresoInicial); 
+			cuentas.add(new Cuenta(numeroCuenta, ingresoInicial)); 
 		} 
 		else {
 			System.out.println("La persona ya tiene el máximo de cuentas");
@@ -120,6 +121,14 @@ public class Persona {
 			}
 		}
 		return cuentasCreadas;
+	}
+
+	public String getDNI() {
+		return DNI;
+	}
+
+	public void setDNI(String dNI) {
+		DNI = dNI;
 	}
 
 }
