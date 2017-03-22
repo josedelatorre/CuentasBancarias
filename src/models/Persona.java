@@ -1,9 +1,13 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Persona {
 	private final int numCuentasMax = 3;
+	@SuppressWarnings("unused")
 	private String DNI;
-	private Cuenta[] cuentas = new Cuenta[numCuentasMax];
+	private List<Cuenta> cuentas = new ArrayList<Cuenta>();
 
 	/**
 	 * Crea un nuevo objeto tipo Persona
@@ -29,8 +33,8 @@ public class Persona {
 	 * @param numCuenta El número de cuenta de la que queremos información.
 	 */
 	public void imprimirEstadoCuenta(int numCuenta){
-		if(cuentas[numCuenta] != null) 
-			System.out.println("Cuenta " + cuentas[numCuenta].getNumeroCuenta() + " saldo: " + cuentas[numCuenta].getSaldo());
+		if(cuentas != null) 
+			System.out.println("Cuenta " + ((Cuenta) cuentas).getNumeroCuenta() + " saldo: " + ((Cuenta) cuentas).getSaldo());
 	}
 	
 	/**
@@ -40,7 +44,7 @@ public class Persona {
 	 */
 	public void recibirDinero(float cantidad, int numCuenta){
 		if(numCuenta < this.numCuentasMax)
-			cuentas[numCuenta].recibirAbono(cantidad);
+			((Cuenta) cuentas).recibirAbono(cantidad);
 		else
 			System.out.println("La cuenta número: " + numCuenta + " no existe.");
 	}
@@ -52,7 +56,7 @@ public class Persona {
 	 */
 	public void pagarDinero(float cantidad, int numCuenta){
 		if(numCuenta < this.numCuentasMax)
-			cuentas[numCuenta].pagarRecibo(cantidad);
+			((Cuenta) cuentas).pagarRecibo(cantidad);
 		else
 			System.out.println("La cuenta número: " + numCuenta + " no existe.");
 	}
@@ -96,12 +100,14 @@ public class Persona {
 	 * Crea una nueva cuenta con un ingreso inicial especificado.
 	 * @param ingresoInicial la cantidad de dinero a ingresar.
 	 */
+	@SuppressWarnings("unchecked")
 	public void nuevaCuenta(float ingresoInicial) {
 		String numeroCuenta = Cuenta.siguienteNumeroCuenta();
+		@SuppressWarnings("unused")
 		int numeroCuentas = this.numeroCuentas();
 		
 		if (this.numeroCuentas() < this.numCuentasMax) {
-			cuentas[numeroCuentas] = new Cuenta(numeroCuenta, ingresoInicial); 
+			cuentas = (List<Cuenta>) new Cuenta(numeroCuenta, ingresoInicial); 
 		} 
 		else {
 			System.out.println("La persona ya tiene el máximo de cuentas");

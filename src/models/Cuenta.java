@@ -1,7 +1,5 @@
 package models;
 
-import java.awt.TextArea;
-
 public class Cuenta {
 	private String numeroCuenta;
 	private float saldo;
