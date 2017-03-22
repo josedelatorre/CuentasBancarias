@@ -1,13 +1,15 @@
 package models;
 
+import java.util.ArrayList;
+
 public class Persona {
 	private final int numCuentasMax = 3;
 	private String DNI;
-	private Cuenta[] cuentas = new Cuenta[numCuentasMax];
+	private ArrayList<Cuenta> cuentas = new ArrayList<Cuenta>();
 
 	/**
 	 * Crea un nuevo objeto tipo Persona
-	 * @param dNI El DNI con el que se identificará a la persona.
+	 * @param dNI El DNI con el que se identificarï¿½ a la persona.
 	 */
 	public Persona(String dNI) {
 		DNI = dNI;
@@ -25,12 +27,12 @@ public class Persona {
 	}
 	
 	/**
-	 * Muestra por consola el estado actual de la cuenta pasada por parámetro.
-	 * @param numCuenta El número de cuenta de la que queremos información.
+	 * Muestra por consola el estado actual de la cuenta pasada por parï¿½metro.
+	 * @param numCuenta El nï¿½mero de cuenta de la que queremos informaciï¿½n.
 	 */
 	public void imprimirEstadoCuenta(int numCuenta){
-		if(cuentas[numCuenta] != null) 
-			System.out.println("Cuenta " + cuentas[numCuenta].getNumeroCuenta() + " saldo: " + cuentas[numCuenta].getSaldo());
+		if(numCuenta < cuentas.size()) 
+			System.out.println("Cuenta " + cuentas.get(numCuenta).getNumeroCuenta() + " saldo: " + cuentas.get(numCuenta).getSaldo());
 	}
 	
 	/**
@@ -40,9 +42,9 @@ public class Persona {
 	 */
 	public void recibirDinero(float cantidad, int numCuenta){
 		if(numCuenta < this.numCuentasMax)
-			cuentas[numCuenta].recibirAbono(cantidad);
+			cuentas.get(numCuenta).recibirAbono(cantidad);
 		else
-			System.out.println("La cuenta número: " + numCuenta + " no existe.");
+			System.out.println("La cuenta nï¿½mero: " + numCuenta + " no existe.");
 	}
 	
 	/**
@@ -52,9 +54,9 @@ public class Persona {
 	 */
 	public void pagarDinero(float cantidad, int numCuenta){
 		if(numCuenta < this.numCuentasMax)
-			cuentas[numCuenta].pagarRecibo(cantidad);
+			cuentas.get(numCuenta).pagarRecibo(cantidad);
 		else
-			System.out.println("La cuenta número: " + numCuenta + " no existe.");
+			System.out.println("La cuenta nï¿½mero: " + numCuenta + " no existe.");
 	}
 	
 	/**
@@ -101,10 +103,10 @@ public class Persona {
 		int numeroCuentas = this.numeroCuentas();
 		
 		if (this.numeroCuentas() < this.numCuentasMax) {
-			cuentas[numeroCuentas] = new Cuenta(numeroCuenta, ingresoInicial); 
+			cuentas.add(numeroCuentas, new Cuenta(numeroCuenta, ingresoInicial));
 		} 
 		else {
-			System.out.println("La persona ya tiene el máximo de cuentas");
+			System.out.println("La persona ya tiene el mï¿½ximo de cuentas");
 		}
 	}
 
